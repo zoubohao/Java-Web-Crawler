@@ -41,6 +41,9 @@ public class PostURL {
 		jsonOb.put("yearFilter",null);
 		ContentType type = ContentType.APPLICATION_JSON;
 		StringEntity entity = new StringEntity(jsonOb.toString(),type);
+		//List<BasicNameValuePair> paraList = new ArrayList<>();
+                //paraList.add(new BasicNameValuePair("", ""));
+                //UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paraList);
 		postOb.setEntity(entity);
 		try {
 			System.out.println("Start getting entity.");

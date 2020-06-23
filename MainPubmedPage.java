@@ -106,6 +106,7 @@ public class MainPubmedPage {
 
     private String getPubmedContent (String term, int page){
         String content = null;
+        System.out.println(this.urlEncoder(term));
         String pubmed = "https://pubmed.ncbi.nlm.nih.gov/";
         String url = pubmed + "?" + "term=" + this.urlEncoder(term) + "&filter=simsearch1.fha&page=" + page;
         RequestConfig config = RequestConfig.custom().setConnectionRequestTimeout(10, TimeUnit.SECONDS)
@@ -170,22 +171,16 @@ public class MainPubmedPage {
                     e.printStackTrace();
                 }
             });
-            try {
-                Thread.sleep((long)(Math.random() * 3000 + 2000));
-            }catch (Exception e){
-                System.out.println("An error has taken place in thread sleep.");
-                e.printStackTrace();
-            }
         }
         fixedThreadsPool.shutdown();
     }
 
+
     public static void main(String [] args) {
         MainPubmedPage test = new MainPubmedPage();
-        int finalPage = 94453;
-        String filePath = "./PMIDs.txt";
-        test.getPubmedIDsUsingThreads("(mouse[MeSH Terms]) AND ((\"2000/01/01\"[Date - Publication] : \"2020/03/26\"[Date - Publication]))",
-                filePath,1,50000,6);
+        String filePath = "./testIDs.txt";
+        test.getPubmedIDsUsingThreads("(Human[MeSH Terms]) AND ((\"2000/01/01\"[Date - Publication] : \"2020/03/26\"[Date - Publication]))",
+                filePath,1,3,1);
 
     }
 
